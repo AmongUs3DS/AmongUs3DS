@@ -23,7 +23,6 @@ var namespaceengine =
     [ "AudioEngine", "d6/d63/classengine_1_1AudioEngine.html", "d6/d63/classengine_1_1AudioEngine" ],
     [ "Button", "d8/d87/classengine_1_1Button.html", "d8/d87/classengine_1_1Button" ],
     [ "CallFunc", "d5/d41/classengine_1_1CallFunc.html", "d5/d41/classengine_1_1CallFunc" ],
-    [ "CameraManager", "d7/dbb/classengine_1_1CameraManager.html", "d7/dbb/classengine_1_1CameraManager" ],
     [ "DelayTime", "df/db0/classengine_1_1DelayTime.html", "df/db0/classengine_1_1DelayTime" ],
     [ "Director", "da/d41/classengine_1_1Director.html", "da/d41/classengine_1_1Director" ],
     [ "DrawNode", "d0/dde/classengine_1_1DrawNode.html", "d0/dde/classengine_1_1DrawNode" ],
@@ -35,12 +34,12 @@ var namespaceengine =
     [ "JoyPosition", "db/d8e/structengine_1_1JoyPosition.html", "db/d8e/structengine_1_1JoyPosition" ],
     [ "Label", "d8/d08/classengine_1_1Label.html", "d8/d08/classengine_1_1Label" ],
     [ "Layout", "d9/d56/classengine_1_1Layout.html", "d9/d56/classengine_1_1Layout" ],
-    [ "MiiManager", "db/d78/classengine_1_1MiiManager.html", "db/d78/classengine_1_1MiiManager" ],
+    [ "Menu", "da/d4e/classengine_1_1Menu.html", "da/d4e/classengine_1_1Menu" ],
     [ "MoveBy", "d8/d2c/classengine_1_1MoveBy.html", "d8/d2c/classengine_1_1MoveBy" ],
     [ "MoveTo", "dc/d9e/classengine_1_1MoveTo.html", "dc/d9e/classengine_1_1MoveTo" ],
     [ "Mutex", "d0/da4/classengine_1_1Mutex.html", "d0/da4/classengine_1_1Mutex" ],
     [ "NetworkManager", "d2/d0c/classengine_1_1NetworkManager.html", "d2/d0c/classengine_1_1NetworkManager" ],
-    [ "NfcManager", "de/d38/classengine_1_1NfcManager.html", "de/d38/classengine_1_1NfcManager" ],
+    [ "NineSliceSprite", "d8/dbd/classengine_1_1NineSliceSprite.html", "d8/dbd/classengine_1_1NineSliceSprite" ],
     [ "Node", "d2/da8/classengine_1_1Node.html", "d2/da8/classengine_1_1Node" ],
     [ "PlaySound", "d5/d0e/classengine_1_1PlaySound.html", "d5/d0e/classengine_1_1PlaySound" ],
     [ "RepeatForever", "d5/d73/classengine_1_1RepeatForever.html", "d5/d73/classengine_1_1RepeatForever" ],
@@ -60,21 +59,6 @@ var namespaceengine =
     [ "Vector", "de/d41/classengine_1_1Vector.html", "de/d41/classengine_1_1Vector" ],
     [ "WorkerThread", "de/d2f/classengine_1_1WorkerThread.html", "de/d2f/classengine_1_1WorkerThread" ],
     [ "SoundId", "dc/d3f/namespaceengine.html#a755fd930c05c72acb666198a7b0073e9", null ],
-    [ "CameraFormat", "dc/d3f/namespaceengine.html#a015e188025d46485745448839ba6cad3", [
-      [ "Rgb565", "dc/d3f/namespaceengine.html#a015e188025d46485745448839ba6cad3a75e25955ac85b490dfa6ddf3af0dd39a", null ],
-      [ "Yuyv", "dc/d3f/namespaceengine.html#a015e188025d46485745448839ba6cad3ad16f388e9f10660845fc803f72f431fc", null ],
-      [ "Bayer", "dc/d3f/namespaceengine.html#a015e188025d46485745448839ba6cad3ad4ff4823ac2f6adeccc0e9df435e2e20", null ]
-    ] ],
-    [ "CameraSelect", "dc/d3f/namespaceengine.html#a996f622c6989d767e1f5851e114c27d5", [
-      [ "OuterLeft", "dc/d3f/namespaceengine.html#a996f622c6989d767e1f5851e114c27d5a53c8d1fb4b839c5c1e779405bb41057a", null ],
-      [ "Inner", "dc/d3f/namespaceengine.html#a996f622c6989d767e1f5851e114c27d5aa1684698ac3d8ffda353d0458c30b1e7", null ],
-      [ "OuterRight", "dc/d3f/namespaceengine.html#a996f622c6989d767e1f5851e114c27d5a422c5668b6b11110fbf6b7497eb323eb", null ]
-    ] ],
-    [ "CameraSize", "dc/d3f/namespaceengine.html#a98ab95461fcb2166fa1f97c7d721a907", [
-      [ "Vga", "dc/d3f/namespaceengine.html#a98ab95461fcb2166fa1f97c7d721a907af93978a3e627da4338437943cea728f0", null ],
-      [ "Qvga", "dc/d3f/namespaceengine.html#a98ab95461fcb2166fa1f97c7d721a907ae13ded67e4fe5b0320b635dd957b5fe7", null ],
-      [ "Qqndv", "dc/d3f/namespaceengine.html#a98ab95461fcb2166fa1f97c7d721a907a443980abc51dc160a49c67f4383466a2", null ]
-    ] ],
     [ "Direction", "dc/d3f/namespaceengine.html#a05e46006900ceb773f3000d07f826589", [
       [ "Up", "dc/d3f/namespaceengine.html#a05e46006900ceb773f3000d07f826589a258f49887ef8d14ac268c92b02503aaa", null ],
       [ "Down", "dc/d3f/namespaceengine.html#a05e46006900ceb773f3000d07f826589a08a38277b0309070706f6652eeae9a53", null ],

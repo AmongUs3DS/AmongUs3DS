@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['x_0',['x',['../de/d41/classengine_1_1Vector.html#a9f30f02f3e86887a49909076a1304b15',1,'engine::Vector::x'],['../d7/dc5/structgame_1_1FloatingCrew.html#a0054b67f22b7a2286344dc2864dbd798',1,'game::FloatingCrew::x']]]
+  ['wavebuf_0',['waveBuf',['../d8/d16/structengine_1_1Sound.html#ac3793a9a6f1ac800b5a2ddf8677f6976',1,'engine::Sound']]],
+  ['width_1',['width',['../d2/d25/classengine_1_1Size.html#a2170f6492caaf02af2c3a213f9adb047',1,'engine::Size']]]
 ];

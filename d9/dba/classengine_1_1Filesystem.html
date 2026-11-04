@@ -114,6 +114,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0e61cf555e86d472774563a0f457dc2d" id="r_a0e61cf555e86d472774563a0f457dc2d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dba/classengine_1_1Filesystem.html#a0e61cf555e86d472774563a0f457dc2d">resolvePath</a> (const std::string &amp;path) const</td></tr>
 <tr class="memdesc:a0e61cf555e86d472774563a0f457dc2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolves virtual romfs file paths to concrete storage paths on the SD card.  <br /></td></tr>
 <tr class="separator:a0e61cf555e86d472774563a0f457dc2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fbd148101fb3909d1cc3e6beb3ced64" id="r_a9fbd148101fb3909d1cc3e6beb3ced64"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dba/classengine_1_1Filesystem.html#a9fbd148101fb3909d1cc3e6beb3ced64">exists</a> (const std::string &amp;path) const</td></tr>
+<tr class="memdesc:a9fbd148101fb3909d1cc3e6beb3ced64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a file exists.  <br /></td></tr>
+<tr class="separator:a9fbd148101fb3909d1cc3e6beb3ced64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a348489459939b6112dacb2c8a2b1b3c2" id="r_a348489459939b6112dacb2c8a2b1b3c2"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dba/classengine_1_1Filesystem.html#a348489459939b6112dacb2c8a2b1b3c2">readFileRomfs</a> (const char *path)</td></tr>
 <tr class="memdesc:a348489459939b6112dacb2c8a2b1b3c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a text asset file from storage.  <br /></td></tr>
 <tr class="separator:a348489459939b6112dacb2c8a2b1b3c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,6 +162,41 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9fbd148101fb3909d1cc3e6beb3ced64" name="a9fbd148101fb3909d1cc3e6beb3ced64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fbd148101fb3909d1cc3e6beb3ced64">&#9670;&#160;</a></span>exists()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool engine::Filesystem::exists </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if a file exists. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>Path to the file. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if file exists, false otherwise. </dd></dl>
+
+</div>
+</div>
 <a id="af8cfb52743973fa0c0d35525ac3d37c7" name="af8cfb52743973fa0c0d35525ac3d37c7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af8cfb52743973fa0c0d35525ac3d37c7">&#9670;&#160;</a></span>getInstance()</h2>
 

@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['rectangle_0',['Rectangle',['../d0/dde/classengine_1_1DrawNode.html#a8ca9c2f9584f8cdbf6c6be2f1ea9f0e7a27f0ce5cec1e90e62b95744bf2c58c32',1,'engine::DrawNode']]],
-  ['red_1',['Red',['../d3/d2c/namespacegame.html#a0731265b29cc7739ae2f4f59b112e036afb35dd395cb7e7a9015fe0a6bf72b45d',1,'game']]],
-  ['reliable_2',['Reliable',['../d0/d12/namespaceengine_1_1hazel.html#abeac1dfc851baf968cdf68bc4e21eac1a84fcf5d37086f2a93953734ce8f385b6',1,'engine::hazel']]],
-  ['rgb565_3',['Rgb565',['../dc/d3f/namespaceengine.html#a015e188025d46485745448839ba6cad3a75e25955ac85b490dfa6ddf3af0dd39a',1,'engine']]],
-  ['right_4',['right',['../d8/d08/classengine_1_1Label.html#a89a9827b361b06140c5c81ee5e7f3d72a2a9d1bc65e17158c1fde4bb75b920a2d',1,'engine::Label::Right'],['../dc/d3f/namespaceengine.html#a05e46006900ceb773f3000d07f826589a92b09c7c48c520c3c55e497875da437c',1,'engine::Right'],['../d3/d2c/namespacegame.html#a75c3bf4a410a4c59692699fbf30d0f88a92b09c7c48c520c3c55e497875da437c',1,'game::Right']]]
+  ['servers_0',['Servers',['../d2/d14/structgame_1_1SettingsPopup_1_1Impl.html#a34d4848c161025c44c07445f3d3c1a2daac659513b2353187192e88c5d1988228',1,'game::SettingsPopup::Impl']]],
+  ['slideleft_1',['SlideLeft',['../dc/d3f/namespaceengine.html#ae8c5fc18e5e13fa23370bbdd0a7bc855a49428a2b7e17b45b1ad9dfc60c69640a',1,'engine']]],
+  ['slideright_2',['SlideRight',['../dc/d3f/namespaceengine.html#ae8c5fc18e5e13fa23370bbdd0a7bc855af5171e3c3fa6ec6be58a6fe8d4a8787b',1,'engine']]],
+  ['stbi_5fdefault_3',['STBI_default',['../d6/d40/stb__image_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba0177ac2c5002f4f251bb766d41752029',1,'stb_image.h']]],
+  ['stbi_5fgrey_4',['STBI_grey',['../d6/d40/stb__image_8h.html#a06fc87d81c62e9abb8790b6e5713c55bad1eb95ca1fa7706bf732bf35a0ed40aa',1,'stb_image.h']]],
+  ['stbi_5fgrey_5falpha_5',['STBI_grey_alpha',['../d6/d40/stb__image_8h.html#a06fc87d81c62e9abb8790b6e5713c55baf5829d16d4cca6077465c5abd346e2f8',1,'stb_image.h']]],
+  ['stbi_5frgb_6',['STBI_rgb',['../d6/d40/stb__image_8h.html#a06fc87d81c62e9abb8790b6e5713c55baa59123e5d0af25f9b1539f5cf1facddf',1,'stb_image.h']]],
+  ['stbi_5frgb_5falpha_7',['STBI_rgb_alpha',['../d6/d40/stb__image_8h.html#a06fc87d81c62e9abb8790b6e5713c55baa7b1af0c9f0310c3ada2aa29a32de293',1,'stb_image.h']]]
 ];

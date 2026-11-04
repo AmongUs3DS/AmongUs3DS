@@ -2,10 +2,12 @@ var graphics_8hpp =
 [
     [ "engine::Node", "d2/da8/classengine_1_1Node.html", "d2/da8/classengine_1_1Node" ],
     [ "engine::Sprite", "dc/d84/classengine_1_1Sprite.html", "dc/d84/classengine_1_1Sprite" ],
+    [ "engine::NineSliceSprite", "d8/dbd/classengine_1_1NineSliceSprite.html", "d8/dbd/classengine_1_1NineSliceSprite" ],
     [ "engine::DrawNode", "d0/dde/classengine_1_1DrawNode.html", "d0/dde/classengine_1_1DrawNode" ],
     [ "engine::Label", "d8/d08/classengine_1_1Label.html", "d8/d08/classengine_1_1Label" ],
     [ "engine::Layout", "d9/d56/classengine_1_1Layout.html", "d9/d56/classengine_1_1Layout" ],
     [ "engine::Button", "d8/d87/classengine_1_1Button.html", "d8/d87/classengine_1_1Button" ],
+    [ "engine::Menu", "da/d4e/classengine_1_1Menu.html", "da/d4e/classengine_1_1Menu" ],
     [ "engine::Scene", "d3/dc3/classengine_1_1Scene.html", null ],
     [ "engine::Director", "da/d41/classengine_1_1Director.html", "da/d41/classengine_1_1Director" ],
     [ "TargetScreen", "d9/d31/graphics_8hpp.html#a0e8df3e3c122958bb9efccf707c3e6ee", [

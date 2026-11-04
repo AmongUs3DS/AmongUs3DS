@@ -8,6 +8,7 @@ var searchData=
   ['filesystem_2ehpp_5',['filesystem.hpp',['../d1/d85/filesystem_8hpp.html',1,'']]],
   ['finitetimeaction_6',['finitetimeaction',['../d9/df6/classengine_1_1FiniteTimeAction.html',1,'engine::FiniteTimeAction'],['../d9/df6/classengine_1_1FiniteTimeAction.html#aaef4508de6755f318a1b5c537e20c1a5',1,'engine::FiniteTimeAction::FiniteTimeAction()']]],
   ['floatingcrew_7',['FloatingCrew',['../d7/dc5/structgame_1_1FloatingCrew.html',1,'game']]],
-  ['format_8',['format',['../d8/d16/structengine_1_1Sound.html#a9df7b907df99f870f75ab66b6026474a',1,'engine::Sound']]],
-  ['func_9',['func',['../d8/d33/structengine_1_1ThreadContext.html#af7b228ffae6a678d872b0e1752e2a34b',1,'engine::ThreadContext']]]
+  ['focus_8',['focus',['../d2/d14/structgame_1_1SettingsPopup_1_1Impl.html#acd0e658dd97a35ff40a5ccd506332572',1,'game::SettingsPopup::Impl']]],
+  ['format_9',['format',['../d8/d16/structengine_1_1Sound.html#a9df7b907df99f870f75ab66b6026474a',1,'engine::Sound']]],
+  ['func_10',['func',['../d8/d33/structengine_1_1ThreadContext.html#af7b228ffae6a678d872b0e1752e2a34b',1,'engine::ThreadContext']]]
 ];

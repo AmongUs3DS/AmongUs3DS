@@ -1,9 +1,9 @@
 var searchData=
 [
   ['packettype_0',['PacketType',['../d0/d12/namespaceengine_1_1hazel.html#abeac1dfc851baf968cdf68bc4e21eac1',1,'engine::hazel']]],
-  ['pan_1',['pan',['../db/ded/structengine_1_1SoundParams.html#a31818868fc1600526a7b9bc34365cb6c',1,'engine::SoundParams::pan'],['../d8/d16/structengine_1_1Sound.html#a0486acb9c197e79b8d76f5dacf07c95b',1,'engine::Sound::pan']]],
+  ['pan_1',['pan',['../d8/d16/structengine_1_1Sound.html#a0486acb9c197e79b8d76f5dacf07c95b',1,'engine::Sound::pan'],['../db/ded/structengine_1_1SoundParams.html#a31818868fc1600526a7b9bc34365cb6c',1,'engine::SoundParams::pan']]],
   ['path_2',['path',['../d8/d16/structengine_1_1Sound.html#ae7687009aab5b8bb66239d140aff35a7',1,'engine::Sound']]],
-  ['pause_3',['pause',['../db/d1d/classengine_1_1SoundHandle.html#a128cab74b7e3dbfdc102cc951c7c3580',1,'engine::SoundHandle::pause()'],['../d6/d63/classengine_1_1AudioEngine.html#af2690a68e1cebe21b8221ec254936fff',1,'engine::AudioEngine::pause(SoundId id)']]],
+  ['pause_3',['pause',['../d6/d63/classengine_1_1AudioEngine.html#af2690a68e1cebe21b8221ec254936fff',1,'engine::AudioEngine::pause()'],['../db/d1d/classengine_1_1SoundHandle.html#a128cab74b7e3dbfdc102cc951c7c3580',1,'engine::SoundHandle::pause()']]],
   ['pauseall_4',['pauseAll',['../d6/d63/classengine_1_1AudioEngine.html#ab6ebfcfdc9f45ef5ae116f7f21717436',1,'engine::AudioEngine']]],
   ['pausebypath_5',['pauseByPath',['../d6/d63/classengine_1_1AudioEngine.html#a76935623a54f760a9d60729741fe3f48',1,'engine::AudioEngine']]],
   ['pausebytag_6',['pauseByTag',['../d6/d63/classengine_1_1AudioEngine.html#a87b1e6944551855851555d59f75dd3a7',1,'engine::AudioEngine']]],
@@ -11,14 +11,17 @@ var searchData=
   ['paused_8',['paused',['../d8/d16/structengine_1_1Sound.html#a24ca0832f54afb0aa271c5395c75587f',1,'engine::Sound']]],
   ['ping_9',['Ping',['../d0/d12/namespaceengine_1_1hazel.html#abeac1dfc851baf968cdf68bc4e21eac1ab85815d04cec053ce6deb8021f2df1b8',1,'engine::hazel']]],
   ['pink_10',['Pink',['../d3/d2c/namespacegame.html#a0731265b29cc7739ae2f4f59b112e036a832436becb9a001b64d97efca52abd16',1,'game']]],
-  ['pitch_11',['pitch',['../db/ded/structengine_1_1SoundParams.html#a7c6a809e4f743e52870958c9abbc8ee4',1,'engine::SoundParams::pitch'],['../d8/d16/structengine_1_1Sound.html#a26f8f0424a748c31401a2137c0109458',1,'engine::Sound::pitch']]],
+  ['pitch_11',['pitch',['../d8/d16/structengine_1_1Sound.html#a26f8f0424a748c31401a2137c0109458',1,'engine::Sound::pitch'],['../db/ded/structengine_1_1SoundParams.html#a7c6a809e4f743e52870958c9abbc8ee4',1,'engine::SoundParams::pitch']]],
   ['playercolor_12',['PlayerColor',['../d3/d2c/namespacegame.html#a0731265b29cc7739ae2f4f59b112e036',1,'game']]],
-  ['playersprite_13',['playersprite',['../da/d64/classgame_1_1PlayerSprite.html#a70f705915c7f473a5af737a445722231',1,'game::PlayerSprite::PlayerSprite()'],['../da/d64/classgame_1_1PlayerSprite.html',1,'game::PlayerSprite']]],
+  ['playersprite_13',['playersprite',['../da/d64/classgame_1_1PlayerSprite.html',1,'game::PlayerSprite'],['../da/d64/classgame_1_1PlayerSprite.html#a70f705915c7f473a5af737a445722231',1,'game::PlayerSprite::PlayerSprite()']]],
   ['playersprite_2ecpp_14',['PlayerSprite.cpp',['../db/dde/PlayerSprite_8cpp.html',1,'']]],
   ['playersprite_2ehpp_15',['PlayerSprite.hpp',['../d9/d5e/PlayerSprite_8hpp.html',1,'']]],
   ['playsfx_16',['playsfx',['../d6/d63/classengine_1_1AudioEngine.html#a733423d057ec8783081257cd76d47105',1,'engine::AudioEngine::playSFX(const std::string &amp;path, bool loop=false)'],['../d6/d63/classengine_1_1AudioEngine.html#af49fb09e45c0568028416fcffbf89622',1,'engine::AudioEngine::playSFX(const std::string &amp;path, const SoundParams &amp;params)'],['../d6/d63/classengine_1_1AudioEngine.html#acacde445999ea89a498ec836b926bf58',1,'engine::AudioEngine::playSFX(const std::string &amp;path, float volume, float pan=0.0f, float pitch=1.0f, bool loop=false, const std::string &amp;tag=&quot;&quot;)']]],
   ['playsound_17',['playsound',['../d5/d0e/classengine_1_1PlaySound.html',1,'engine::PlaySound'],['../d5/d0e/classengine_1_1PlaySound.html#a0fd8597a9376c4100d54c499ff9114e8',1,'engine::PlaySound::PlaySound()']]],
   ['poll_18',['poll',['../d2/dbe/classengine_1_1Input.html#ab6c8d76a3f87a668bae1960f41beb2b0',1,'engine::Input']]],
-  ['prerequisites_19',['Prerequisites',['../index.html#autotoc_md1',1,'']]],
-  ['purple_20',['Purple',['../d3/d2c/namespacegame.html#a0731265b29cc7739ae2f4f59b112e036afda5d553ff3773443d3db28b1f4a8fe2',1,'game']]]
+  ['popup_19',['Popup',['../d7/de3/classgame_1_1Popup.html',1,'game']]],
+  ['popup_2ecpp_20',['Popup.cpp',['../d8/dc8/Popup_8cpp.html',1,'']]],
+  ['popup_2ehpp_21',['Popup.hpp',['../dd/dc6/Popup_8hpp.html',1,'']]],
+  ['prerequisites_22',['Prerequisites',['../index.html#autotoc_md1',1,'']]],
+  ['purple_23',['Purple',['../d3/d2c/namespacegame.html#a0731265b29cc7739ae2f4f59b112e036afda5d553ff3773443d3db28b1f4a8fe2',1,'game']]]
 ];

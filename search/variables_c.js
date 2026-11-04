@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['outline_0',['outline',['../d5/dad/structgame_1_1CharacterColorLayers.html#ae453795e88b237a5c6ba81f1030a3c9b',1,'game::CharacterColorLayers']]]
+  ['numeric_0',['NUMERIC',['../dd/db8/classqrcodegen_1_1QrSegment_1_1Mode.html#ae4c4fd7f09b271a04e142d4d856e6bf6',1,'qrcodegen::QrSegment::Mode']]]
 ];

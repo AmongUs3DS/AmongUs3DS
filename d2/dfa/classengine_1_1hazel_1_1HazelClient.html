@@ -128,9 +128,36 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad343f9d0dd66e932273b76d33b1a1e8c" id="r_ad343f9d0dd66e932273b76d33b1a1e8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfa/classengine_1_1hazel_1_1HazelClient.html#ad343f9d0dd66e932273b76d33b1a1e8c">sendHello</a> (const std::string &amp;username, uint32_t clientVersion)</td></tr>
 <tr class="memdesc:ad343f9d0dd66e932273b76d33b1a1e8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a handshake hello packet with player credentials and version.  <br /></td></tr>
 <tr class="separator:ad343f9d0dd66e932273b76d33b1a1e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4100fd845c44781f8991b25cc0dfded4" id="r_a4100fd845c44781f8991b25cc0dfded4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfa/classengine_1_1hazel_1_1HazelClient.html#a4100fd845c44781f8991b25cc0dfded4">sendHostGame</a> ()</td></tr>
+<tr class="memdesc:a4100fd845c44781f8991b25cc0dfded4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Requests a new lobby using the server's version-4 game options format.  <br /></td></tr>
+<tr class="separator:a4100fd845c44781f8991b25cc0dfded4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a687d25d0a6927ef9c558a07aab3cef5b" id="r_a687d25d0a6927ef9c558a07aab3cef5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfa/classengine_1_1hazel_1_1HazelClient.html#a687d25d0a6927ef9c558a07aab3cef5b">sendJoinGame</a> (int32_t gameCode)</td></tr>
+<tr class="memdesc:a687d25d0a6927ef9c558a07aab3cef5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Requests to join a lobby using its packed game code.  <br /></td></tr>
+<tr class="separator:a687d25d0a6927ef9c558a07aab3cef5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbb29b1261e0b870f8f9f226cc0a10d5" id="r_afbb29b1261e0b870f8f9f226cc0a10d5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfa/classengine_1_1hazel_1_1HazelClient.html#afbb29b1261e0b870f8f9f226cc0a10d5">isConnected</a> () const</td></tr>
 <tr class="memdesc:afbb29b1261e0b870f8f9f226cc0a10d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if connected to a server.  <br /></td></tr>
 <tr class="separator:afbb29b1261e0b870f8f9f226cc0a10d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b4ad5ba629c7c00bfeb11ed4f928630" id="r_a9b4ad5ba629c7c00bfeb11ed4f928630"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfa/classengine_1_1hazel_1_1HazelClient.html#a9b4ad5ba629c7c00bfeb11ed4f928630">getHostGameCode</a> () const</td></tr>
+<tr class="memdesc:a9b4ad5ba629c7c00bfeb11ed4f928630"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the game code received from a successful HostGame response, or zero.  <br /></td></tr>
+<tr class="separator:a9b4ad5ba629c7c00bfeb11ed4f928630"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a141551302f2d1e3f8dfad7832593f729" id="r_a141551302f2d1e3f8dfad7832593f729"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfa/classengine_1_1hazel_1_1HazelClient.html#a141551302f2d1e3f8dfad7832593f729">hasJoinedGame</a> () const</td></tr>
+<tr class="memdesc:a141551302f2d1e3f8dfad7832593f729"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether a JoinGame success response has been received.  <br /></td></tr>
+<tr class="separator:a141551302f2d1e3f8dfad7832593f729"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9acfadd22d476bb6fa0654a4f2160aa" id="r_af9acfadd22d476bb6fa0654a4f2160aa"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfa/classengine_1_1hazel_1_1HazelClient.html#af9acfadd22d476bb6fa0654a4f2160aa">getPlayerId</a> () const</td></tr>
+<tr class="memdesc:af9acfadd22d476bb6fa0654a4f2160aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the assigned player ID from a JoinGame response.  <br /></td></tr>
+<tr class="separator:af9acfadd22d476bb6fa0654a4f2160aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eb98894b2f7b43770c0c1d15c9de2bb" id="r_a9eb98894b2f7b43770c0c1d15c9de2bb"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfa/classengine_1_1hazel_1_1HazelClient.html#a9eb98894b2f7b43770c0c1d15c9de2bb">getGameCode</a> () const</td></tr>
+<tr class="memdesc:a9eb98894b2f7b43770c0c1d15c9de2bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current lobby game code.  <br /></td></tr>
+<tr class="separator:a9eb98894b2f7b43770c0c1d15c9de2bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fd137a97892346ec6c5db15b2ddbd30" id="r_a1fd137a97892346ec6c5db15b2ddbd30"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfa/classengine_1_1hazel_1_1HazelClient.html#a1fd137a97892346ec6c5db15b2ddbd30">getHostId</a> () const</td></tr>
+<tr class="memdesc:a1fd137a97892346ec6c5db15b2ddbd30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the server-assigned host ID for the current lobby.  <br /></td></tr>
+<tr class="separator:a1fd137a97892346ec6c5db15b2ddbd30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af06e6de93cc2c59152a54a59d1211e09" id="r_af06e6de93cc2c59152a54a59d1211e09"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; int32_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfa/classengine_1_1hazel_1_1HazelClient.html#af06e6de93cc2c59152a54a59d1211e09">getOtherPlayerIds</a> () const</td></tr>
+<tr class="memdesc:af06e6de93cc2c59152a54a59d1211e09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns IDs of players already present when joining.  <br /></td></tr>
+<tr class="separator:af06e6de93cc2c59152a54a59d1211e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37e37713fc3289cb8a474dc3b1891c01" id="r_a37e37713fc3289cb8a474dc3b1891c01"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfa/classengine_1_1hazel_1_1HazelClient.html#a37e37713fc3289cb8a474dc3b1891c01">hasGameStarted</a> () const</td></tr>
+<tr class="memdesc:a37e37713fc3289cb8a474dc3b1891c01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the server has started the current game.  <br /></td></tr>
+<tr class="separator:a37e37713fc3289cb8a474dc3b1891c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Client network connection class implementing the Hazel protocol. </p>
@@ -239,6 +266,195 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a9eb98894b2f7b43770c0c1d15c9de2bb" name="a9eb98894b2f7b43770c0c1d15c9de2bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9eb98894b2f7b43770c0c1d15c9de2bb">&#9670;&#160;</a></span>getGameCode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t engine::hazel::HazelClient::getGameCode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the current lobby game code. </p>
+
+</div>
+</div>
+<a id="a9b4ad5ba629c7c00bfeb11ed4f928630" name="a9b4ad5ba629c7c00bfeb11ed4f928630"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b4ad5ba629c7c00bfeb11ed4f928630">&#9670;&#160;</a></span>getHostGameCode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t engine::hazel::HazelClient::getHostGameCode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the game code received from a successful HostGame response, or zero. </p>
+
+</div>
+</div>
+<a id="a1fd137a97892346ec6c5db15b2ddbd30" name="a1fd137a97892346ec6c5db15b2ddbd30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fd137a97892346ec6c5db15b2ddbd30">&#9670;&#160;</a></span>getHostId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t engine::hazel::HazelClient::getHostId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the server-assigned host ID for the current lobby. </p>
+
+</div>
+</div>
+<a id="af06e6de93cc2c59152a54a59d1211e09" name="af06e6de93cc2c59152a54a59d1211e09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af06e6de93cc2c59152a54a59d1211e09">&#9670;&#160;</a></span>getOtherPlayerIds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt; int32_t &gt; &amp; engine::hazel::HazelClient::getOtherPlayerIds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns IDs of players already present when joining. </p>
+
+</div>
+</div>
+<a id="af9acfadd22d476bb6fa0654a4f2160aa" name="af9acfadd22d476bb6fa0654a4f2160aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9acfadd22d476bb6fa0654a4f2160aa">&#9670;&#160;</a></span>getPlayerId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t engine::hazel::HazelClient::getPlayerId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the assigned player ID from a JoinGame response. </p>
+
+</div>
+</div>
+<a id="a37e37713fc3289cb8a474dc3b1891c01" name="a37e37713fc3289cb8a474dc3b1891c01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37e37713fc3289cb8a474dc3b1891c01">&#9670;&#160;</a></span>hasGameStarted()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool engine::hazel::HazelClient::hasGameStarted </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns whether the server has started the current game. </p>
+
+</div>
+</div>
+<a id="a141551302f2d1e3f8dfad7832593f729" name="a141551302f2d1e3f8dfad7832593f729"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a141551302f2d1e3f8dfad7832593f729">&#9670;&#160;</a></span>hasJoinedGame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool engine::hazel::HazelClient::hasJoinedGame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns whether a JoinGame success response has been received. </p>
+
+</div>
+</div>
 <a id="afbb29b1261e0b870f8f9f226cc0a10d5" name="afbb29b1261e0b870f8f9f226cc0a10d5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afbb29b1261e0b870f8f9f226cc0a10d5">&#9670;&#160;</a></span>isConnected()</h2>
 
@@ -301,6 +517,45 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a4100fd845c44781f8991b25cc0dfded4" name="a4100fd845c44781f8991b25cc0dfded4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4100fd845c44781f8991b25cc0dfded4">&#9670;&#160;</a></span>sendHostGame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void engine::hazel::HazelClient::sendHostGame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Requests a new lobby using the server's version-4 game options format. </p>
+
+</div>
+</div>
+<a id="a687d25d0a6927ef9c558a07aab3cef5b" name="a687d25d0a6927ef9c558a07aab3cef5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a687d25d0a6927ef9c558a07aab3cef5b">&#9670;&#160;</a></span>sendJoinGame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void engine::hazel::HazelClient::sendJoinGame </td>
+          <td>(</td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>gameCode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Requests to join a lobby using its packed game code. </p>
 
 </div>
 </div>

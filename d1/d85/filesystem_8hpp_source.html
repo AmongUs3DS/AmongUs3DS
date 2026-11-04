@@ -127,18 +127,31 @@ $(document).ready(function(){initNavTree('d1/d85/filesystem_8hpp_source.html','.
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        }</div>
 </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        std::string <a class="code hl_function" href="../../d9/dba/classengine_1_1Filesystem.html#a348489459939b6112dacb2c8a2b1b3c2">readFileRomfs</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* path);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        std::vector&lt;uint8_t&gt; <a class="code hl_function" href="../../d9/dba/classengine_1_1Filesystem.html#aeeb8d085bfe0871ef26588a7e738bddc">readFileBinaryRomfs</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* path);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <a class="code hl_class" href="../../d9/dba/classengine_1_1Filesystem.html">Filesystem</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    };</div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="../../d9/dba/classengine_1_1Filesystem.html#a9fbd148101fb3909d1cc3e6beb3ced64">   47</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="../../d9/dba/classengine_1_1Filesystem.html#a9fbd148101fb3909d1cc3e6beb3ced64">exists</a>(<span class="keyword">const</span> std::string&amp; path)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            std::string resolved = <a class="code hl_function" href="../../d9/dba/classengine_1_1Filesystem.html#a0e61cf555e86d472774563a0f457dc2d">resolvePath</a>(path);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            FILE* f = std::fopen(resolved.c_str(), <span class="stringliteral">&quot;r&quot;</span>);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <span class="keywordflow">if</span> (f) {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                std::fclose(f);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        }</div>
 </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        std::string <a class="code hl_function" href="../../d9/dba/classengine_1_1Filesystem.html#a348489459939b6112dacb2c8a2b1b3c2">readFileRomfs</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* path);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        std::vector&lt;uint8_t&gt; <a class="code hl_function" href="../../d9/dba/classengine_1_1Filesystem.html#aeeb8d085bfe0871ef26588a7e738bddc">readFileBinaryRomfs</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* path);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <a class="code hl_class" href="../../d9/dba/classengine_1_1Filesystem.html">Filesystem</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    };</div>
+</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
 <div class="ttc" id="aclassengine_1_1Filesystem_html"><div class="ttname"><a href="../../d9/dba/classengine_1_1Filesystem.html">engine::Filesystem</a></div><div class="ttdoc">Singleton filesystem helper class responsible for path resolution and reading asset files.</div><div class="ttdef"><b>Definition</b> filesystem.hpp:13</div></div>
 <div class="ttc" id="aclassengine_1_1Filesystem_html_a0e61cf555e86d472774563a0f457dc2d"><div class="ttname"><a href="../../d9/dba/classengine_1_1Filesystem.html#a0e61cf555e86d472774563a0f457dc2d">engine::Filesystem::resolvePath</a></div><div class="ttdeci">std::string resolvePath(const std::string &amp;path) const</div><div class="ttdoc">Resolves virtual romfs file paths to concrete storage paths on the SD card.</div><div class="ttdef"><b>Definition</b> filesystem.hpp:35</div></div>
 <div class="ttc" id="aclassengine_1_1Filesystem_html_a348489459939b6112dacb2c8a2b1b3c2"><div class="ttname"><a href="../../d9/dba/classengine_1_1Filesystem.html#a348489459939b6112dacb2c8a2b1b3c2">engine::Filesystem::readFileRomfs</a></div><div class="ttdeci">std::string readFileRomfs(const char *path)</div><div class="ttdoc">Reads a text asset file from storage.</div><div class="ttdef"><b>Definition</b> filesystem.cpp:5</div></div>
+<div class="ttc" id="aclassengine_1_1Filesystem_html_a9fbd148101fb3909d1cc3e6beb3ced64"><div class="ttname"><a href="../../d9/dba/classengine_1_1Filesystem.html#a9fbd148101fb3909d1cc3e6beb3ced64">engine::Filesystem::exists</a></div><div class="ttdeci">bool exists(const std::string &amp;path) const</div><div class="ttdoc">Checks if a file exists.</div><div class="ttdef"><b>Definition</b> filesystem.hpp:47</div></div>
 <div class="ttc" id="aclassengine_1_1Filesystem_html_ad14831ccfd709dcbe9c1d024c297a6d3"><div class="ttname"><a href="../../d9/dba/classengine_1_1Filesystem.html#ad14831ccfd709dcbe9c1d024c297a6d3">engine::Filesystem::operator=</a></div><div class="ttdeci">Filesystem &amp; operator=(const Filesystem &amp;)=delete</div><div class="ttdoc">Deleted copy assignment operator.</div></div>
 <div class="ttc" id="aclassengine_1_1Filesystem_html_aeeb8d085bfe0871ef26588a7e738bddc"><div class="ttname"><a href="../../d9/dba/classengine_1_1Filesystem.html#aeeb8d085bfe0871ef26588a7e738bddc">engine::Filesystem::readFileBinaryRomfs</a></div><div class="ttdeci">std::vector&lt; uint8_t &gt; readFileBinaryRomfs(const char *path)</div><div class="ttdoc">Reads a binary asset file into a byte vector.</div><div class="ttdef"><b>Definition</b> filesystem.cpp:35</div></div>
 <div class="ttc" id="aclassengine_1_1Filesystem_html_af0c268ad401de8aaa82006b22ab08053"><div class="ttname"><a href="../../d9/dba/classengine_1_1Filesystem.html#af0c268ad401de8aaa82006b22ab08053">engine::Filesystem::Filesystem</a></div><div class="ttdeci">Filesystem(const Filesystem &amp;)=delete</div><div class="ttdoc">Deleted copy constructor.</div></div>

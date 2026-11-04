@@ -109,8 +109,9 @@ Inheritance diagram for engine::Sprite:</div>
  <div class="center">
   <img src="../../dc/d84/classengine_1_1Sprite.png" usemap="#engine::Sprite_map" alt=""/>
   <map id="engine::Sprite_map" name="engine::Sprite_map">
-<area href="../../d2/da8/classengine_1_1Node.html" title="Base class for all visual elements, render nodes, containers, and scenes in the engine." alt="engine::Node" shape="rect" coords="0,0,118,24"/>
-<area href="../../da/d64/classgame_1_1PlayerSprite.html" title="Sprite class specialized for rendering and recoloring player characters." alt="game::PlayerSprite" shape="rect" coords="0,112,118,136"/>
+<area href="../../d2/da8/classengine_1_1Node.html" title="Base class for all visual elements, render nodes, containers, and scenes in the engine." alt="engine::Node" shape="rect" coords="76,0,219,24"/>
+<area href="../../d8/dbd/classengine_1_1NineSliceSprite.html" title="Renders 9-slice scalable image sprites." alt="engine::NineSliceSprite" shape="rect" coords="0,112,143,136"/>
+<area href="../../da/d64/classgame_1_1PlayerSprite.html" title="Sprite class specialized for rendering and recoloring player characters." alt="game::PlayerSprite" shape="rect" coords="153,112,296,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -125,12 +126,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4e756e3714436c67471196242f17c3f0" id="r_a4e756e3714436c67471196242f17c3f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d84/classengine_1_1Sprite.html#a4e756e3714436c67471196242f17c3f0">initWithFile</a> (const std::string &amp;path)</td></tr>
 <tr class="memdesc:a4e756e3714436c67471196242f17c3f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes sprite texture data from a file path.  <br /></td></tr>
 <tr class="separator:a4e756e3714436c67471196242f17c3f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe0af397979f9a11359265e74f5f1227" id="r_afe0af397979f9a11359265e74f5f1227"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d84/classengine_1_1Sprite.html#afe0af397979f9a11359265e74f5f1227">setTint</a> (u32 color)</td></tr>
-<tr class="memdesc:afe0af397979f9a11359265e74f5f1227"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a color tint overlay on the sprite.  <br /></td></tr>
-<tr class="separator:afe0af397979f9a11359265e74f5f1227"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea0a8d4812939253813bad47bbb08541" id="r_aea0a8d4812939253813bad47bbb08541"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d84/classengine_1_1Sprite.html#aea0a8d4812939253813bad47bbb08541">clearTint</a> ()</td></tr>
-<tr class="memdesc:aea0a8d4812939253813bad47bbb08541"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears any active color tint on the sprite.  <br /></td></tr>
-<tr class="separator:aea0a8d4812939253813bad47bbb08541"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad99d35b59b42288f6bb9c85310aea8b8" id="r_ad99d35b59b42288f6bb9c85310aea8b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d84/classengine_1_1Sprite.html#ad99d35b59b42288f6bb9c85310aea8b8">setTint</a> (u32 color) override</td></tr>
+<tr class="memdesc:ad99d35b59b42288f6bb9c85310aea8b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a color tint overlay on the sprite.  <br /></td></tr>
+<tr class="separator:ad99d35b59b42288f6bb9c85310aea8b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7851186ddedb8ce8a9ced630f3025f4" id="r_ad7851186ddedb8ce8a9ced630f3025f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d84/classengine_1_1Sprite.html#ad7851186ddedb8ce8a9ced630f3025f4">clearTint</a> () override</td></tr>
+<tr class="memdesc:ad7851186ddedb8ce8a9ced630f3025f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears any active color tint on the sprite.  <br /></td></tr>
+<tr class="separator:ad7851186ddedb8ce8a9ced630f3025f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ea339a6e5ff889039ecf305918f13c9" id="r_a4ea339a6e5ff889039ecf305918f13c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d84/classengine_1_1Sprite.html#a4ea339a6e5ff889039ecf305918f13c9">setGreenChannelOnly</a> (bool enabled) override</td></tr>
+<tr class="memdesc:a4ea339a6e5ff889039ecf305918f13c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows only each pixel's original green channel.  <br /></td></tr>
+<tr class="separator:a4ea339a6e5ff889039ecf305918f13c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9dadf3ac630857d33ca8b9b083adea1" id="r_af9dadf3ac630857d33ca8b9b083adea1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d84/classengine_1_1Sprite.html#af9dadf3ac630857d33ca8b9b083adea1">draw</a> (float parentX, float parentY, float parentScaleX, float parentScaleY, float parentRotation) override</td></tr>
 <tr class="memdesc:af9dadf3ac630857d33ca8b9b083adea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders the node graphics.  <br /></td></tr>
 <tr class="separator:af9dadf3ac630857d33ca8b9b083adea1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -231,6 +235,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:affeb643d4104d69033a1daaa1eff6a9a inherit pub_methods_classengine_1_1Node" id="r_affeb643d4104d69033a1daaa1eff6a9a"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/da8/classengine_1_1Node.html#affeb643d4104d69033a1daaa1eff6a9a">getHeight</a> () const</td></tr>
 <tr class="memdesc:affeb643d4104d69033a1daaa1eff6a9a inherit pub_methods_classengine_1_1Node"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets node content height.  <br /></td></tr>
 <tr class="separator:affeb643d4104d69033a1daaa1eff6a9a inherit pub_methods_classengine_1_1Node"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbb4718765e9104857347ca39b37c03d inherit pub_methods_classengine_1_1Node" id="r_afbb4718765e9104857347ca39b37c03d"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/da8/classengine_1_1Node.html#afbb4718765e9104857347ca39b37c03d">getAnchorX</a> () const</td></tr>
+<tr class="memdesc:afbb4718765e9104857347ca39b37c03d inherit pub_methods_classengine_1_1Node"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets anchor X.  <br /></td></tr>
+<tr class="separator:afbb4718765e9104857347ca39b37c03d inherit pub_methods_classengine_1_1Node"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35d752961d7e377e0d823764d4bb4bef inherit pub_methods_classengine_1_1Node" id="r_a35d752961d7e377e0d823764d4bb4bef"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/da8/classengine_1_1Node.html#a35d752961d7e377e0d823764d4bb4bef">getAnchorY</a> () const</td></tr>
+<tr class="memdesc:a35d752961d7e377e0d823764d4bb4bef inherit pub_methods_classengine_1_1Node"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets anchor Y.  <br /></td></tr>
+<tr class="separator:a35d752961d7e377e0d823764d4bb4bef inherit pub_methods_classengine_1_1Node"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -336,11 +346,14 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aea0a8d4812939253813bad47bbb08541" name="aea0a8d4812939253813bad47bbb08541"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea0a8d4812939253813bad47bbb08541">&#9670;&#160;</a></span>clearTint()</h2>
+<a id="ad7851186ddedb8ce8a9ced630f3025f4" name="ad7851186ddedb8ce8a9ced630f3025f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7851186ddedb8ce8a9ced630f3025f4">&#9670;&#160;</a></span>clearTint()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void engine::Sprite::clearTint </td>
@@ -349,9 +362,16 @@ Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Clears any active color tint on the sprite. </p>
+
+<p>Reimplemented from <a class="el" href="../../d2/da8/classengine_1_1Node.html#a61a50e08b07c5424ff2670a9dde22284">engine::Node</a>.</p>
 
 </div>
 </div>
@@ -485,11 +505,44 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="afe0af397979f9a11359265e74f5f1227" name="afe0af397979f9a11359265e74f5f1227"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe0af397979f9a11359265e74f5f1227">&#9670;&#160;</a></span>setTint()</h2>
+<a id="a4ea339a6e5ff889039ecf305918f13c9" name="a4ea339a6e5ff889039ecf305918f13c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ea339a6e5ff889039ecf305918f13c9">&#9670;&#160;</a></span>setGreenChannelOnly()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void engine::Sprite::setGreenChannelOnly </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enabled</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Shows only each pixel's original green channel. </p>
+
+<p>Reimplemented from <a class="el" href="../../d2/da8/classengine_1_1Node.html#ae5c296975b3fd37198e91171a37351ee">engine::Node</a>.</p>
+
+</div>
+</div>
+<a id="ad99d35b59b42288f6bb9c85310aea8b8" name="ad99d35b59b42288f6bb9c85310aea8b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad99d35b59b42288f6bb9c85310aea8b8">&#9670;&#160;</a></span>setTint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void engine::Sprite::setTint </td>
@@ -499,6 +552,11 @@ Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Sets a color tint overlay on the sprite. </p>
@@ -508,6 +566,8 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>Reimplemented from <a class="el" href="../../d2/da8/classengine_1_1Node.html#a7a5df9a48914e8804df6a5c518f74b18">engine::Node</a>.</p>
 
 </div>
 </div>

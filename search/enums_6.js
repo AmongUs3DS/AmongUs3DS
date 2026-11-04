@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['shapetype_0',['ShapeType',['../d0/dde/classengine_1_1DrawNode.html#a8ca9c2f9584f8cdbf6c6be2f1ea9f0e7',1,'engine::DrawNode']]],
-  ['soundformat_1',['SoundFormat',['../dc/d3f/namespaceengine.html#aad2b50eb96ae487acc0b433fa9c6cd24',1,'engine']]],
-  ['stardirection_2',['StarDirection',['../d3/d2c/namespacegame.html#a75c3bf4a410a4c59692699fbf30d0f88',1,'game']]]
+  ['tab_0',['Tab',['../d2/d14/structgame_1_1SettingsPopup_1_1Impl.html#a34d4848c161025c44c07445f3d3c1a2d',1,'game::SettingsPopup::Impl']]],
+  ['targetscreen_1',['TargetScreen',['../dc/d3f/namespaceengine.html#a0e8df3e3c122958bb9efccf707c3e6ee',1,'engine']]],
+  ['transitiontype_2',['TransitionType',['../dc/d3f/namespaceengine.html#ae8c5fc18e5e13fa23370bbdd0a7bc855',1,'engine']]],
+  ['type_3',['Type',['../d9/d56/classengine_1_1Layout.html#ae81b67206fad1fc8e75418eb3069a844',1,'engine::Layout']]]
 ];
