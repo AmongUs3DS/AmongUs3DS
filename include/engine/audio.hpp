@@ -158,6 +158,8 @@ namespace engine {
         bool m_initialized = false;                         ///< Initialization state flag.
         SoundId m_nextSoundId = 1;                          ///< Counter for generating unique sound IDs.
         float m_masterVolume = 1.0f;                        ///< Global master volume scale factor.
+        float m_sfxVolume = 1.0f;                           ///< Global sound-effect volume scale factor.
+        float m_musicVolume = 1.0f;                         ///< Global music volume scale factor.
 
         /** @brief Default constructor for singleton pattern. */
         AudioEngine() = default;
@@ -343,6 +345,18 @@ namespace engine {
         
         /** @brief Gets the global master volume scale factor. @return Master volume level. */
         float getMasterVolume() const { return m_masterVolume; }
+
+        /** @brief Sets the global sound-effect volume. @param volume Volume level [0.0, 1.0]. */
+        void setSfxVolume(float volume);
+
+        /** @brief Gets the global sound-effect volume. @return Sound-effect volume level. */
+        float getSfxVolume() const { return m_sfxVolume; }
+
+        /** @brief Sets the global music volume. @param volume Volume level [0.0, 1.0]. */
+        void setMusicVolume(float volume);
+
+        /** @brief Gets the global music volume. @return Music volume level. */
+        float getMusicVolume() const { return m_musicVolume; }
 
         /** @brief Gets the total count of currently playing/active sounds. @return Sound count. */
         size_t getPlayingSoundCount() const { return m_playingSounds.size(); }

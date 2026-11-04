@@ -132,8 +132,21 @@ namespace hazel {
     }
 
     MessageReader MessageReader::readMessage() {
+        if (m_cursor + 3 > m_buffer.size()) {
+            MessageReader empty(m_buffer);
+            empty.m_cursor = empty.m_buffer.size();
+            return empty;
+        }
+
         uint16_t length = readUInt16();
         uint8_t tag = readByte();
+        if (m_cursor + length > m_buffer.size()) {
+            m_cursor = m_buffer.size();
+            MessageReader empty(m_buffer);
+            empty.m_cursor = empty.m_buffer.size();
+            return empty;
+        }
+
         std::vector<uint8_t> payload = readBytes(length);
         
         MessageReader nestedReader(payload);
@@ -173,15 +186,65 @@ namespace hazel {
     }
 
     void HazelClient::sendHello(const std::string& username, uint32_t clientVersion) {
-        MessageWriter writer;
-        writer.writeByte(static_cast<uint8_t>(PacketType::Hello));
-        writer.writeUInt16(m_nonce++);
-        writer.writeByte(1);
-        writer.writeUInt32(clientVersion);
-        writer.writeString(username);
+        MessageWriter handshake;
+        handshake.writeInt32(static_cast<int32_t>(clientVersion));
+        handshake.writeString(username);
 
-        sendto(m_socket, writer.getBuffer().data(), writer.getBuffer().size(), 0, 
+        std::vector<uint8_t> packet;
+        packet.push_back(static_cast<uint8_t>(PacketType::Hello));
+        const uint16_t nonce = ++m_nonce;
+        packet.push_back((nonce >> 8) & 0xFF);
+        packet.push_back(nonce & 0xFF);
+        packet.insert(packet.end(), handshake.getBuffer().begin(), handshake.getBuffer().end());
+
+        sendto(m_socket, packet.data(), packet.size(), 0,
                (struct sockaddr*)&m_serverAddr, sizeof(m_serverAddr));
+    }
+
+    void HazelClient::sendHostGame() {
+        if (!m_connected) return;
+
+        MessageWriter options;
+        options.writeByte(4);          // GameOptionsData version
+        options.writeByte(10);         // MaxPlayers
+        options.writeUInt32(256);      // English keywords
+        options.writeByte(0);          // Skeld
+        options.writeFloat(1.0f);      // PlayerSpeedMod
+        options.writeFloat(1.0f);      // CrewLightMod
+        options.writeFloat(1.0f);      // ImpostorLightMod
+        options.writeFloat(15.0f);     // KillCooldown
+        options.writeByte(1);          // Common tasks
+        options.writeByte(2);          // Long tasks
+        options.writeByte(2);          // Short tasks
+        options.writeInt32(1);         // Emergency meetings
+        options.writeByte(1);          // Impostors
+        options.writeByte(1);          // Normal kill distance
+        options.writeUInt32(15);       // Discussion time
+        options.writeUInt32(120);      // Voting time
+        options.writeByte(1);          // IsDefaults
+        options.writeByte(15);         // Emergency cooldown
+        options.writeByte(1);          // Confirm impostor
+        options.writeByte(1);          // Visual tasks
+        options.writeByte(0);          // Anonymous votes
+        options.writeByte(0);          // Task bar always
+
+        MessageWriter message;
+        message.startMessage(0);       // MessageFlags.HostGame
+        message.writePackedUInt32(options.getBuffer().size());
+        message.writeBytes(options.getBuffer().data(), options.getBuffer().size());
+        message.endMessage();
+        sendReliable(message);
+    }
+
+    void HazelClient::sendJoinGame(int32_t gameCode) {
+        if (!m_connected) return;
+
+        MessageWriter message;
+        message.startMessage(1);       // MessageFlags.JoinGame
+        message.writeInt32(gameCode);
+        message.writeByte(0);          // Protocol-reserved field
+        message.endMessage();
+        sendReliable(message);
     }
 
     void HazelClient::sendUnreliable(const MessageWriter& msg) {
@@ -198,8 +261,8 @@ namespace hazel {
         packet.push_back(static_cast<uint8_t>(PacketType::Reliable));
         
         uint16_t currentNonce = m_nonce++;
-        packet.push_back(currentNonce & 0xFF);
         packet.push_back((currentNonce >> 8) & 0xFF);
+        packet.push_back(currentNonce & 0xFF);
         
         packet.insert(packet.end(), msg.getBuffer().begin(), msg.getBuffer().end());
         
@@ -210,8 +273,8 @@ namespace hazel {
     void HazelClient::sendAcknowledge(uint16_t nonce) {
         uint8_t ackPacket[4];
         ackPacket[0] = static_cast<uint8_t>(PacketType::Acknowledge);
-        ackPacket[1] = nonce & 0xFF;
-        ackPacket[2] = (nonce >> 8) & 0xFF;
+        ackPacket[1] = (nonce >> 8) & 0xFF;
+        ackPacket[2] = nonce & 0xFF;
         ackPacket[3] = 0xFF;
         
         sendto(m_socket, ackPacket, 4, 0, (struct sockaddr*)&m_serverAddr, sizeof(m_serverAddr));
@@ -243,11 +306,45 @@ namespace hazel {
         reader.readByte();
 
         if (type == PacketType::Reliable || type == PacketType::Ping) {
-            uint16_t nonce = reader.readUInt16();
+            if (data.size() < 3) return;
+            uint16_t nonce = (static_cast<uint16_t>(data[1]) << 8) | data[2];
             sendAcknowledge(nonce);
 
             if (type == PacketType::Reliable) {
-                // handle the stuff
+                if (data.size() <= 3) return;
+
+                std::vector<uint8_t> messageData(data.begin() + 3, data.end());
+                MessageReader messages(messageData);
+                while (messages.hasMore()) {
+                    MessageReader message = messages.readMessage();
+                    if (message.getTag() == 0 && message.hasMore()) {
+                        m_hostGameCode = message.readInt32();
+                        m_gameCode = m_hostGameCode;
+                    } else if (message.getTag() == 1 && message.hasMore()) {
+                        message.readInt32();
+                        if (message.hasMore()) {
+                            m_playerId = message.readInt32();
+                            if (message.hasMore()) {
+                                message.readInt32();
+                                m_joinedGame = true;
+                            }
+                        }
+                    } else if (message.getTag() == 2) {
+                        m_gameStarted = true;
+                    } else if (message.getTag() == 7 && message.hasMore()) {
+                        m_gameCode = message.readInt32();
+                        m_playerId = message.readInt32();
+                        m_hostId = message.readInt32();
+                        m_otherPlayerIds.clear();
+                        const uint32_t count = message.readPackedUInt32();
+                        for (uint32_t i = 0; i < count && message.hasMore(); ++i) {
+                            m_otherPlayerIds.push_back(message.readPackedInt32());
+                        }
+                        m_joinedGame = true;
+                    } else if (message.getTag() == 10 && message.hasMore()) {
+                        m_gameCode = message.readInt32();
+                    }
+                }
             }
         }
     }

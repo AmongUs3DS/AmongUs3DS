@@ -52,7 +52,9 @@ const Sound* AudioEngine::findSound(SoundId id) const {
 void AudioEngine::applyChannelMix(Sound& sound) {
     if (sound.channel < 0 || sound.channel >= 24) return;
     float mix[12] = {0};
-    float effectiveVol = m_masterVolume * sound.volume;
+    const bool isMusic = sound.tag.find("music") != std::string::npos;
+    const float categoryVolume = isMusic ? m_musicVolume : m_sfxVolume;
+    float effectiveVol = m_masterVolume * categoryVolume * sound.volume;
     effectiveVol = std::max(0.0f, std::min(1.0f, effectiveVol));
 
     float pan = std::max(-1.0f, std::min(1.0f, sound.pan));
@@ -223,7 +225,7 @@ SoundHandle AudioEngine::playSFX(const std::string& path, const SoundParams& par
     }
 
     std::memcpy(audioBuffer, fileData.data() + dataOffset, dataSize);
-    DSP_FlushDataCache(audioBuffer, dataSize);
+    DSP_FlushDataCache(audioBuffer, (dataSize + 31) & ~31);
 
     int channel = -1;
     for (int i = 0; i < 24; i++) {
@@ -587,6 +589,20 @@ void AudioEngine::resumeAll() {
 
 void AudioEngine::setMasterVolume(float volume) {
     m_masterVolume = std::max(0.0f, std::min(1.0f, volume));
+    for (auto& s : m_playingSounds) {
+        if (s) applyChannelMix(*s);
+    }
+}
+
+void AudioEngine::setSfxVolume(float volume) {
+    m_sfxVolume = std::max(0.0f, std::min(1.0f, volume));
+    for (auto& s : m_playingSounds) {
+        if (s) applyChannelMix(*s);
+    }
+}
+
+void AudioEngine::setMusicVolume(float volume) {
+    m_musicVolume = std::max(0.0f, std::min(1.0f, volume));
     for (auto& s : m_playingSounds) {
         if (s) applyChannelMix(*s);
     }

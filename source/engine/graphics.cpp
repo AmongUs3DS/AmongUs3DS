@@ -217,6 +217,8 @@ namespace engine {
             }
         }
 
+        m_pixelData = finalData;
+
         C3D_Tex* tex = new C3D_Tex();
         if (!C3D_TexInit(tex, texWidth, texHeight, GPU_RGBA8)) {
             stbi_image_free(imgData);
@@ -251,6 +253,20 @@ namespace engine {
         m_hasTint = false;
     }
 
+    void Sprite::setGreenChannelOnly(bool enabled) {
+        if (!m_image.tex || m_pixelData.empty()) return;
+
+        std::vector<uint8_t> pixelData = m_pixelData;
+        if (enabled) {
+            for (size_t i = 0; i < pixelData.size(); i += 4) {
+                pixelData[i + 1] = 0;
+                pixelData[i + 3] = 0;
+            }
+        }
+
+        C3D_TexUpload(m_image.tex, pixelData.data());
+    }
+
     void Sprite::draw(float parentX, float parentY, float parentScaleX, float parentScaleY, float parentRotation) {
         if (!m_image.tex) return;
 
@@ -277,6 +293,147 @@ namespace engine {
         }
 
         C2D_DrawImage(m_image, &params, tintPtr);
+    }
+
+    std::shared_ptr<NineSliceSprite> NineSliceSprite::create(const std::string& path, float top, float bottom, float left, float right) {
+        auto sprite = std::make_shared<NineSliceSprite>();
+        if (sprite->initWithFile(path)) {
+            sprite->setInsets(top, bottom, left, right);
+            return sprite;
+        }
+        return nullptr;
+    }
+
+    void NineSliceSprite::draw(float parentX, float parentY, float parentScaleX, float parentScaleY, float parentRotation) {
+        if (!m_image.tex || !m_image.subtex) return;
+
+        float imgW = m_image.subtex->width;
+        float imgH = m_image.subtex->height;
+        if (imgW <= 0 || imgH <= 0) return;
+
+        float L = std::min(m_insetLeft, imgW);
+        float R = std::min(m_insetRight, imgW - L);
+        float T = std::min(m_insetTop, imgH);
+        float B = std::min(m_insetBottom, imgH - T);
+
+        float W = m_contentWidth;
+        float H = m_contentHeight;
+
+        float DL = L * m_borderScale;
+        float DR = R * m_borderScale;
+        float DT = T * m_borderScale;
+        float DB = B * m_borderScale;
+
+        if (DL + DR > W && (DL + DR) > 0.0f) {
+            float scale = W / (DL + DR);
+            DL *= scale;
+            DR *= scale;
+        }
+        if (DT + DB > H && (DT + DB) > 0.0f) {
+            float scale = H / (DT + DB);
+            DT *= scale;
+            DB *= scale;
+        }
+
+        float DW = W - DL - DR;
+        float DH = H - DT - DB;
+        if (DW < 0) DW = 0;
+        if (DH < 0) DH = 0;
+
+        float srcCols[3][2] = {
+            {0.0f, L},
+            {L, imgW - L - R},
+            {imgW - R, R}
+        };
+        float srcRows[3][2] = {
+            {0.0f, T},
+            {T, imgH - T - B},
+            {imgH - B, B}
+        };
+
+        float destCols[3][2] = {
+            {0.0f, DL},
+            {DL, DW},
+            {W - DR, DR}
+        };
+        float destRows[3][2] = {
+            {0.0f, DT},
+            {DT, DH},
+            {H - DB, DB}
+        };
+
+        float baseLeft = m_image.subtex->left;
+        float baseTop = m_image.subtex->top;
+        float baseRight = m_image.subtex->right;
+        float baseBottom = m_image.subtex->bottom;
+
+        C2D_ImageTint* tintPtr = nullptr;
+        C2D_ImageTint drawTint;
+
+        if (m_hasTint || m_opacity < 1.0f) {
+            if (m_hasTint) {
+                drawTint = m_tint;
+            } else {
+                C2D_PlainImageTint(&drawTint, C2D_Color32(255, 255, 255, 255), m_opacity);
+            }
+            tintPtr = &drawTint;
+        }
+
+        float rad = parentRotation * (M_PI / 180.0f);
+        float cosA = cos(rad);
+        float sinA = sin(rad);
+
+        float anchorOffsetX = m_anchorX * W;
+        float anchorOffsetY = m_anchorY * H;
+
+        for (int r = 0; r < 3; ++r) {
+            float srcY = srcRows[r][0];
+            float srcH = srcRows[r][1];
+            float destY = destRows[r][0];
+            float destH = destRows[r][1];
+
+            if (srcH <= 0 || destH <= 0) continue;
+
+            for (int c = 0; c < 3; ++c) {
+                float srcX = srcCols[c][0];
+                float srcW = srcCols[c][1];
+                float destX = destCols[c][0];
+                float destW = destCols[c][1];
+
+                if (srcW <= 0 || destW <= 0) continue;
+
+                Tex3DS_SubTexture subtex;
+                subtex.width = (u16)srcW;
+                subtex.height = (u16)srcH;
+                subtex.left = baseLeft + (srcX / imgW) * (baseRight - baseLeft);
+                subtex.top = baseTop + (srcY / imgH) * (baseBottom - baseTop);
+                subtex.right = baseLeft + ((srcX + srcW) / imgW) * (baseRight - baseLeft);
+                subtex.bottom = baseTop + ((srcY + srcH) / imgH) * (baseBottom - baseTop);
+
+                C2D_Image tileImg = { m_image.tex, &subtex };
+
+                float localX = destX - anchorOffsetX;
+                float localY = destY - anchorOffsetY;
+
+                float scaledX = localX * parentScaleX;
+                float scaledY = localY * parentScaleY;
+
+                float tileAbsX = parentX + (scaledX * cosA - scaledY * sinA);
+                float tileAbsY = parentY + (scaledX * sinA + scaledY * cosA);
+
+                C2D_DrawParams params;
+                params.pos.x = tileAbsX;
+                params.pos.y = tileAbsY;
+                params.pos.w = destW * parentScaleX;
+                params.pos.h = destH * parentScaleY;
+                params.center.x = 0.0f;
+                params.center.y = 0.0f;
+                params.angle = rad;
+                params.depth = 0.5f;
+
+                C2D_DrawImage(tileImg, &params, tintPtr);
+            }
+        }
     }
     
     std::shared_ptr<DrawNode> DrawNode::createRect(float w, float h, u32 color) {
@@ -451,11 +608,29 @@ namespace engine {
 
         setContentSize(w, h);
 
-        m_bgRect = DrawNode::createRect(w, h, normalColor);
-        addChild(m_bgRect);
+        if (normalColor != 0) {
+            m_bgRect = DrawNode::createRect(w, h, normalColor);
+            addChild(m_bgRect);
+        }
 
         if (contentNode) {
             m_contentNode = contentNode;
+            m_contentNode->setAnchorPoint(0.5f, 0.5f);
+            m_contentNode->setPosition(w * 0.5f, h * 0.5f);
+            addChild(m_contentNode);
+        }
+    }
+
+    Button::Button(const std::string& spritePath, std::function<void()> onClick)
+        : m_onClick(onClick) {
+        auto sprite = Sprite::create(spritePath);
+        if (sprite) {
+            float w = sprite->getWidth();
+            float h = sprite->getHeight();
+            setContentSize(w, h);
+            sprite->setAnchorPoint(0.0f, 0.0f);
+            sprite->setPosition(0.0f, 0.0f);
+            m_contentNode = sprite;
             addChild(m_contentNode);
         }
     }
@@ -464,8 +639,34 @@ namespace engine {
         return std::make_shared<Button>(contentNode, normalColor, pressedColor, onClick);
     }
 
+    std::shared_ptr<Button> Button::create(const std::string& spritePath, std::function<void()> onClick) {
+        return std::make_shared<Button>(spritePath, onClick);
+    }
+
+    void Button::onClickAction() {
+        if (!m_enabled) return;
+        if (!m_clickSoundPath.empty()) {
+            engine::AudioEngine::getInstance().playSFX(m_clickSoundPath);
+        }
+        if (m_onClick) m_onClick();
+    }
+
+    void Button::setFocused(bool focused) {
+        if (m_focused == focused) return;
+        m_focused = focused;
+
+        if (m_contentNode) {
+            if (m_focused) {
+                m_contentNode->setGreenChannelOnly(true);
+            } else {
+                m_contentNode->setGreenChannelOnly(false);
+            }
+        }
+    }
+
     void Button::update(float dt) {
         Node::update(dt);
+        if (!m_enabled) return;
 
         auto& input = engine::Input::getInstance();
         if (input.isTouched()) {
@@ -480,18 +681,142 @@ namespace engine {
                 p = p->getParent();
             }
 
-            float startX = absX - (m_contentWidth * m_anchorX);
-            float startY = absY - (m_contentHeight * m_anchorY);
+            float width = m_contentWidth * m_scaleX;
+            float height = m_contentHeight * m_scaleY;
+            float startX = absX - (width * m_anchorX);
+            float startY = absY - (height * m_anchorY);
 
-            if (touch.px >= startX && touch.px <= startX + m_contentWidth && touch.py >= startY && touch.py <= startY + m_contentHeight) {
-                m_isPressed = true;
-                if (m_bgRect) m_bgRect->setColor(m_pressedColor);
-                if (m_onClick) m_onClick();
+            if (touch.px >= startX && touch.px <= startX + width && touch.py >= startY && touch.py <= startY + height) {
+                if (!m_isPressed) {
+                    m_isPressed = true;
+                    onClickAction();
+                }
             }
         } else {
             if (m_isPressed) {
                 m_isPressed = false;
-                if (m_bgRect) m_bgRect->setColor(m_normalColor);
+            }
+        }
+    }
+
+    void Menu::update(float dt) {
+        Node::update(dt);
+        if (!m_navigationEnabled || m_buttons.empty()) return;
+
+        if (m_navCooldown > 0.0f) {
+            m_navCooldown -= dt;
+        }
+
+        auto& input = Input::getInstance();
+
+        if (input.isTouched()) {
+            touchPosition touch = input.getTouch();
+            for (size_t i = 0; i < m_buttons.size(); ++i) {
+                auto& btn = m_buttons[i];
+                if (!btn || !btn->isEnabled()) continue;
+
+                float absX = btn->getX();
+                float absY = btn->getY();
+                Node* p = btn->getParent();
+                while (p) {
+                    absX += p->getX();
+                    absY += p->getY();
+                    p = p->getParent();
+                }
+
+                float width = btn->getWidth() * btn->getScaleX();
+                float height = btn->getHeight() * btn->getScaleY();
+                float startX = absX - (width * btn->getAnchorX());
+                float startY = absY - (height * btn->getAnchorY());
+
+                if (touch.px >= startX && touch.px <= startX + width &&
+                    touch.py >= startY && touch.py <= startY + height) {
+                    if (m_selectedIndex != (int)i) {
+                        setSelectedIndex((int)i, false);
+                    }
+                    break;
+                }
+            }
+        }
+
+        int dirX = 0;
+        int dirY = 0;
+
+        if (m_navCooldown <= 0.0f) {
+            auto cp = input.getCirclePad();
+            if (input.isDpadLeft() || cp.dx < -50) {
+                dirX = -1;
+                m_navCooldown = 0.2f;
+            } else if (input.isDpadRight() || cp.dx > 50) {
+                dirX = 1;
+                m_navCooldown = 0.2f;
+            } else if (input.isDpadUp() || cp.dy > 50) {
+                dirY = -1;
+                m_navCooldown = 0.2f;
+            } else if (input.isDpadDown() || cp.dy < -50) {
+                dirY = 1;
+                m_navCooldown = 0.2f;
+            }
+
+            if (dirX != 0 || dirY != 0) {
+                if (m_selectedIndex < 0 || m_selectedIndex >= (int)m_buttons.size()) {
+                    setSelectedIndex(0, false);
+                } else {
+                    auto currentBtn = m_buttons[m_selectedIndex];
+                    float currX = currentBtn->getX();
+                    float currY = currentBtn->getY();
+
+                    int bestIdx = m_selectedIndex;
+                    float bestScore = 1e9f;
+
+                    for (size_t i = 0; i < m_buttons.size(); ++i) {
+                        if ((int)i == m_selectedIndex) continue;
+                        auto& b = m_buttons[i];
+                        if (!b || !b->isEnabled()) continue;
+
+                        float bx = b->getX();
+                        float by = b->getY();
+
+                        float dx = bx - currX;
+                        float dy = by - currY;
+
+                        bool inDir = false;
+                        if (dirX != 0) {
+                            if ((dirX > 0 && dx > 2.0f) || (dirX < 0 && dx < -2.0f)) {
+                                if (std::abs(dy) <= std::abs(dx) * 2.5f) {
+                                    inDir = true;
+                                }
+                            }
+                        }
+                        if (dirY != 0) {
+                            if ((dirY > 0 && dy > 2.0f) || (dirY < 0 && dy < -2.0f)) {
+                                if (std::abs(dx) <= std::abs(dy) * 2.5f) {
+                                    inDir = true;
+                                }
+                            }
+                        }
+
+                        if (inDir) {
+                            float dist = dx * dx + dy * dy;
+                            if (dist < bestScore) {
+                                bestScore = dist;
+                                bestIdx = (int)i;
+                            }
+                        }
+                    }
+
+                    if (bestIdx != m_selectedIndex) {
+                        setSelectedIndex(bestIdx, false);
+                    }
+                }
+            }
+        }
+
+        if (input.isAKeyDown() && m_selectedIndex >= 0 && m_selectedIndex < (int)m_buttons.size()) {
+            auto btn = m_buttons[m_selectedIndex];
+            if (btn && btn->isEnabled()) {
+                btn->setPressed(true);
+                btn->onClickAction();
             }
         }
     }

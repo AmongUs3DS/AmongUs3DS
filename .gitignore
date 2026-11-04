@@ -1,5 +1,6 @@
 game-source/
 build/
+build_manual/
 
 # using this because i got no wifi lol
 3ds-examples/
@@ -10,5 +11,7 @@ AmongUs3DS.elf
 AmongUs3DS.smdh
 banner.bnr
 romfs.bin
+manual.bin
+manual.cfa
 
 docs_output/

@@ -31,13 +31,10 @@
 #include <engine/math.hpp>
 #include <engine/actions.hpp>
 #include <engine/audio.hpp>
-#include <engine/camera.hpp>
 #include <engine/filesystem.hpp>
 #include <engine/graphics.hpp>
 #include <engine/hazel.hpp>
 #include <engine/input.hpp>
-#include <engine/mii.hpp>
 #include <engine/network.hpp>
-#include <engine/nfc.hpp>
 #include <engine/threads.hpp>
 #include <engine/time.hpp>

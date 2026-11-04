@@ -175,6 +175,21 @@ namespace engine {
         
         /** @brief Gets node content height. @return Height in pixels. */
         virtual float getHeight() const { return m_contentHeight; }
+
+        /** @brief Gets anchor X. @return Anchor X. */
+        float getAnchorX() const { return m_anchorX; }
+
+        /** @brief Gets anchor Y. @return Anchor Y. */
+        float getAnchorY() const { return m_anchorY; }
+
+        /** @brief Sets tint color. */
+        virtual void setTint(u32 color) {}
+
+        /** @brief Clears tint color. */
+        virtual void clearTint() {}
+
+        /** @brief Enables or disables a green-channel-only display mode. */
+        virtual void setGreenChannelOnly(bool enabled) {}
     };
 
     /**
@@ -210,10 +225,43 @@ namespace engine {
         bool initWithFile(const std::string& path);
         
         /** @brief Sets a color tint overlay on the sprite. @param color 32-bit RGBA color integer. */
-        void setTint(u32 color);
+        void setTint(u32 color) override;
         
         /** @brief Clears any active color tint on the sprite. */
-        void clearTint();
+        void clearTint() override;
+
+        /** @brief Shows only each pixel's original green channel. */
+        void setGreenChannelOnly(bool enabled) override;
+
+        void draw(float parentX, float parentY, float parentScaleX, float parentScaleY, float parentRotation) override;
+    };
+
+    /**
+     * @brief Renders 9-slice scalable image sprites.
+     */
+    class NineSliceSprite : public Sprite {
+    protected:
+        float m_insetTop = 0.0f;
+        float m_insetBottom = 0.0f;
+        float m_insetLeft = 0.0f;
+        float m_insetRight = 0.0f;
+        float m_borderScale = 1.0f;
+
+    public:
+        NineSliceSprite() = default;
+        virtual ~NineSliceSprite() = default;
+
+        static std::shared_ptr<NineSliceSprite> create(const std::string& path, float top, float bottom, float left, float right);
+
+        void setBorderScale(float scale) { m_borderScale = scale; }
+        float getBorderScale() const { return m_borderScale; }
+
+        void setInsets(float top, float bottom, float left, float right) {
+            m_insetTop = top;
+            m_insetBottom = bottom;
+            m_insetLeft = left;
+            m_insetRight = right;
+        }
 
         void draw(float parentX, float parentY, float parentScaleX, float parentScaleY, float parentRotation) override;
     };
@@ -413,32 +461,95 @@ namespace engine {
         std::shared_ptr<DrawNode> m_bgRect;     /**< Background visual drawing rectangle. */
         std::shared_ptr<Node> m_contentNode;    /**< Foreground content node (icon or label). */
         std::function<void()> m_onClick;        /**< Click action callback function. */
-        u32 m_normalColor;                      /**< Background color in normal state. */
-        u32 m_pressedColor;                     /**< Background color when pressed. */
+        std::string m_clickSoundPath;           /**< Audio path played on click. */
+        u32 m_normalColor = 0;                  /**< Background color in normal state. */
+        u32 m_pressedColor = 0;                 /**< Background color when pressed. */
         bool m_isPressed = false;               /**< Current pressed state flag. */
+        bool m_enabled = true;                  /**< Enabled state flag. */
+        bool m_isRound = false;                 /**< Round button flag. */
+        bool m_focused = false;                 /**< Current focused/hovered state flag. */
 
     public:
-        /**
-         * @brief Constructs a Button.
-         * @param contentNode Foreground content node.
-         * @param normalColor RGBA color in idle state.
-         * @param pressedColor RGBA color when pressed.
-         * @param onClick Callback function triggered on click.
-         */
         Button(std::shared_ptr<Node> contentNode, u32 normalColor, u32 pressedColor, std::function<void()> onClick);
-        
-        /** @brief Virtual destructor. */
+        Button(const std::string& spritePath, std::function<void()> onClick);
         virtual ~Button() = default;
 
-        /**
-         * @brief Factory method to create a Button.
-         * @param contentNode Foreground content node.
-         * @param normalColor RGBA color in idle state.
-         * @param pressedColor RGBA color when pressed.
-         * @param onClick Callback function triggered on click.
-         * @return Shared pointer to the created Button.
-         */
         static std::shared_ptr<Button> create(std::shared_ptr<Node> contentNode, u32 normalColor, u32 pressedColor, std::function<void()> onClick);
+        static std::shared_ptr<Button> create(const std::string& spritePath, std::function<void()> onClick);
+
+        void setIsRound(bool round) { m_isRound = round; }
+        bool isRound() const { return m_isRound; }
+
+        void setClickSound(const std::string& path) { m_clickSoundPath = path; }
+        void setEnabled(bool enabled) { m_enabled = enabled; }
+        bool isEnabled() const { return m_enabled; }
+
+        void setPressed(bool pressed) { m_isPressed = pressed; }
+
+        bool isFocused() const { return m_focused; }
+        void setFocused(bool focused);
+
+        void onClickAction();
+
+        void update(float dt) override;
+    };
+
+    /**
+     * @brief Interactive menu container managing buttons, navigation, and selection state.
+     */
+    class Menu : public Node {
+    private:
+        std::vector<std::shared_ptr<Button>> m_buttons;
+        bool m_navigationEnabled = true;
+        int m_selectedIndex = -1;
+        float m_navCooldown = 0.0f;
+
+    public:
+        Menu() = default;
+        virtual ~Menu() = default;
+
+        static std::shared_ptr<Menu> create() {
+            return std::make_shared<Menu>();
+        }
+
+        void addButton(std::shared_ptr<Button> btn) {
+            if (btn) {
+                m_buttons.push_back(btn);
+                addChild(btn);
+                if (m_selectedIndex < 0 && m_buttons.size() == 1) {
+                    setSelectedIndex(0, false);
+                }
+            }
+        }
+
+        const std::vector<std::shared_ptr<Button>>& getButtons() const {
+            return m_buttons;
+        }
+
+        void setNavigationEnabled(bool enabled) {
+            m_navigationEnabled = enabled;
+            if (!enabled && m_selectedIndex >= 0 && m_selectedIndex < (int)m_buttons.size()) {
+                m_buttons[m_selectedIndex]->setFocused(false);
+            }
+        }
+
+        bool isNavigationEnabled() const {
+            return m_navigationEnabled;
+        }
+
+        void setSelectedIndex(int index, bool animate) {
+            if (m_selectedIndex >= 0 && m_selectedIndex < (int)m_buttons.size()) {
+                m_buttons[m_selectedIndex]->setFocused(false);
+            }
+            m_selectedIndex = index;
+            if (m_selectedIndex >= 0 && m_selectedIndex < (int)m_buttons.size()) {
+                m_buttons[m_selectedIndex]->setFocused(true);
+            }
+        }
+
+        int getSelectedIndex() const {
+            return m_selectedIndex;
+        }
 
         void update(float dt) override;
     };

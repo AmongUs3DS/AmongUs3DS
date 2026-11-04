@@ -7,6 +7,8 @@
  * @brief Game namespace containing game-specific objects, scenes, and color definitions.
  */
 namespace game {
+    class MenuSceneTop;
+    class MenuSceneBottom;
 
     /**
      * @brief Scene class rendering the splash screen top screen.
@@ -16,6 +18,8 @@ namespace game {
         std::shared_ptr<engine::Sprite> m_innerslothLogo;   ///< Innersloth logo sprite.
         std::shared_ptr<engine::DrawNode> m_fadeOut;        ///< Fade out overlay node.
         std::shared_ptr<Starfield> m_starfield;             ///< Background starfield effect.
+        std::shared_ptr<MenuSceneTop> m_menuTop;            ///< Pre-loaded menu top scene.
+        std::shared_ptr<MenuSceneBottom> m_menuBottom;      ///< Pre-loaded menu bottom scene.
 
     public:
         /**

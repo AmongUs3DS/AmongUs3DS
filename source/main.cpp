@@ -19,7 +19,6 @@ int main(int argc, char **argv) {
     romfsInit();
 
     if (!checkAssetsExist()) {
-        engine::NetworkManager::getInstance().init();
         C2D_Prepare();
 
         auto& director = engine::Director::getInstance();
@@ -31,7 +30,6 @@ int main(int argc, char **argv) {
         director.runWithScenes(helperTop, helperBottom);
         director.mainLoop();
 
-        engine::NetworkManager::getInstance().shutdown();
         romfsExit();
         C2D_Fini();
         C3D_Fini();

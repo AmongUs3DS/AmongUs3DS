@@ -12,7 +12,7 @@ include $(DEVKITARM)/3ds_rules
 #---------------------------------------------------------------------------------
 TARGET      := AmongUs3DS
 BUILD       := build
-SOURCES     := source source/engine source/game source/game/scenes source/game/objects
+SOURCES     := $(shell find source -type d 2>/dev/null || echo source)
 DATA        := data
 INCLUDES    := include
 ROMFS       := romfs
@@ -106,28 +106,39 @@ endif
 all: $(BUILD) $(TARGET).cia
 
 $(BUILD):
-		@[ -d $@ ] || mkdir -p $@
-		@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+	@[ -d $@ ] || mkdir -p $@
+	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
 romfs.bin: $(ROMFS)
-		@echo "Compiling RomFS folder into binary..."
-		@$(3DSTOOL) -cvtf romfs $@ --romfs-dir $(ROMFS)
+	@echo "Compiling RomFS folder into binary..."
+	@$(3DSTOOL) -cvtf romfs $@ --romfs-dir $(ROMFS)
 
-$(TARGET).cia: $(BUILD) $(TARGET).smdh banner.bnr romfs.bin
-		@echo "Packaging CIA..."
-		@$(MAKEROM) -f cia -o $@ -elf $(TARGET).elf -rsf $(RSF) -icon $(TARGET).smdh -banner banner.bnr -romfs romfs.bin -exefslogo -target t
+manual.bin: manual/export/Manual.bcma
+	@echo "Compiling Manual RomFS partition binary..."
+	@mkdir -p build_manual
+	@cp manual/export/Manual.bcma build_manual/Manual.bcma
+	@$(3DSTOOL) -cvtf romfs $@ --romfs-dir build_manual
+	@rm -rf build_manual
+
+manual.cfa: manual.bin
+	@echo "Packaging Manual CFA..."
+	@$(MAKEROM) -f cfa -o $@ -rsf manual/export/Manual.rsf -target t -romfs $<
+
+$(TARGET).cia: $(BUILD) $(TARGET).smdh banner.bnr romfs.bin manual.cfa
+	@echo "Packaging CIA..."
+	@$(MAKEROM) -f cia -o $@ -elf $(TARGET).elf -rsf $(RSF) -icon $(TARGET).smdh -banner banner.bnr -romfs romfs.bin -exefslogo -target t -i manual.cfa:1:1
 
 $(TARGET).smdh: $(APP_ICON)
-		@echo "Generating SMDH..."
-		@$(BANNERTOOL) makesmdh -s "$(APP_TITLE)" -l "$(APP_DESCRIPTION)" -p "$(APP_AUTHOR)" -i "$(APP_ICON)" -o $@
+	@echo "Generating SMDH..."
+	@$(BANNERTOOL) makesmdh -s "$(APP_TITLE)" -l "$(APP_DESCRIPTION)" -p "$(APP_AUTHOR)" -i "$(APP_ICON)" -o $@
 
 banner.bnr: $(BANNER_IMAGE) $(BANNER_AUDIO)
-		@echo "Generating Banner..."
-		@$(BANNERTOOL) makebanner -i $(BANNER_IMAGE) -a $(BANNER_AUDIO) -o $@
+	@echo "Generating Banner..."
+	@$(BANNERTOOL) makebanner -i $(BANNER_IMAGE) -a $(BANNER_AUDIO) -o $@
 
 clean:
-		@echo clean ...
-		@rm -fr $(BUILD) $(TARGET).3dsx $(TARGET).smdh $(OUTPUT).smdh $(TARGET).elf $(TARGET).cia banner.bnr romfs.bin
+	@echo clean ...
+	@rm -fr $(BUILD) $(TARGET).3dsx $(TARGET).smdh $(OUTPUT).smdh $(TARGET).elf $(TARGET).cia banner.bnr romfs.bin manual.bin manual.cfa build_manual
 
 else
 DEPENDS :=  $(OFILES:.o=.d)

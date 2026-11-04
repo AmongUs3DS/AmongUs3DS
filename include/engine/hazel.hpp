@@ -113,7 +113,7 @@ namespace hazel {
      */
     class MessageReader {
     private:
-        const std::vector<uint8_t>& m_buffer; ///< Reference to packet byte buffer.
+        std::vector<uint8_t> m_buffer;         ///< Owned packet byte buffer.
         size_t m_cursor = 0;                    ///< Current read cursor position in bytes.
         uint8_t m_tag = 0;                      ///< Active message tag byte.
 
@@ -173,6 +173,13 @@ namespace hazel {
         sockaddr_in m_serverAddr;      ///< Server socket address structure.
         uint16_t m_nonce = 0;          ///< Packet sequence nonce counter.
         bool m_connected = false;      ///< Connection state flag.
+        int32_t m_hostGameCode = 0;
+        int32_t m_gameCode = 0;
+        int32_t m_playerId = 0;
+        int32_t m_hostId = 0;
+        bool m_joinedGame = false;
+        bool m_gameStarted = false;
+        std::vector<int32_t> m_otherPlayerIds;
 
     public:
         /** @brief Constructs a HazelClient instance. */
@@ -203,9 +210,36 @@ namespace hazel {
         
         /** @brief Sends a handshake hello packet with player credentials and version. @param username Player username string. @param clientVersion Game client version identifier. */
         void sendHello(const std::string& username, uint32_t clientVersion);
+
+        /** @brief Requests a new lobby using the server's version-4 game options format. */
+        void sendHostGame();
+
+        /** @brief Requests to join a lobby using its packed game code. */
+        void sendJoinGame(int32_t gameCode);
         
         /** @brief Checks if connected to a server. @return True if connected. */
         bool isConnected() const { return m_connected; }
+
+        /** @brief Returns the game code received from a successful HostGame response, or zero. */
+        int32_t getHostGameCode() const { return m_hostGameCode; }
+
+        /** @brief Returns whether a JoinGame success response has been received. */
+        bool hasJoinedGame() const { return m_joinedGame; }
+
+        /** @brief Returns the assigned player ID from a JoinGame response. */
+        int32_t getPlayerId() const { return m_playerId; }
+
+        /** @brief Returns the current lobby game code. */
+        int32_t getGameCode() const { return m_gameCode != 0 ? m_gameCode : m_hostGameCode; }
+
+        /** @brief Returns the server-assigned host ID for the current lobby. */
+        int32_t getHostId() const { return m_hostId; }
+
+        /** @brief Returns IDs of players already present when joining. */
+        const std::vector<int32_t>& getOtherPlayerIds() const { return m_otherPlayerIds; }
+
+        /** @brief Returns whether the server has started the current game. */
+        bool hasGameStarted() const { return m_gameStarted; }
 
     private:
         /** @brief Sends an acknowledgement packet for a received nonce. @param nonce Packet nonce to acknowledge. */

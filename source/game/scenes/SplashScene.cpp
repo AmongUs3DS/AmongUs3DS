@@ -55,22 +55,20 @@ namespace game {
                 engine::PlaySound::create("sdmc:/3ds/AmongUs3DS/assets/audio/task_Complete.wav"),
                 engine::ScaleTo::create(0.15f, 0.325f, engine::Ease::SineIn),
                 engine::ScaleTo::create(0.15f, 0.3f, engine::Ease::SineOut),
+                engine::DelayTime::create(1.0f),
                 engine::CallFunc::create([fadePtr]() {
-                    fadePtr->runAction(engine::Sequence::create(
-                        engine::FadeIn::create(0.5f),
-                        engine::DelayTime::create(0.15f),
-                        engine::CallFunc::create([]() {
-                            auto menuSceneTop = game::MenuSceneTop::create();
-                            auto menuSceneBottom = game::MenuSceneBottom::create();
-
-                            engine::Director::getInstance().setTopScene(menuSceneTop);
-                            engine::Director::getInstance().setBottomScene(menuSceneBottom);
-                        })
-                    ));
+                    fadePtr->runAction(engine::FadeIn::create(0.5f));
                     auto bottom = std::static_pointer_cast<SplashSceneBottom>(engine::Director::getInstance().getBottomScene());
                     if (bottom) {
-                        bottom->startFadeOut(0.75f);
+                        bottom->startFadeOut(0.5f);
                     }
+                }),
+                engine::DelayTime::create(0.5f),
+                engine::CallFunc::create([this]() {
+                    m_menuTop = game::MenuSceneTop::create();
+                    m_menuBottom = game::MenuSceneBottom::create();
+                    engine::Director::getInstance().setTopScene(m_menuTop);
+                    engine::Director::getInstance().setBottomScene(m_menuBottom);
                 })
             ));
         }
@@ -100,17 +98,20 @@ namespace game {
         m_rodCredit = engine::Label::create("romfs:/fonts/arial.bcfnt", "Ported to 3DS\nby OmgRod");
         m_rodCredit->setAlignment(engine::Label::HAlign::Center);
         m_rodCredit->setAnchorPoint(0.5f, 0.5f);
-        m_rodCredit->setPosition(size.width / 2.0f, size.height / 2.0f);
+        m_rodCredit->setPosition(size.width / 2.0f, size.height / 2.0f - 15.0f);
         m_rodCredit->setTextScale(1.0f);
         this->addChild(m_rodCredit);
 
+        auto warningLabel = engine::Label::create("romfs:/fonts/arial.bcfnt", "Note: Screen may freeze for a moment, this is normal.");
+        warningLabel->setAlignment(engine::Label::HAlign::Center);
+        warningLabel->setAnchorPoint(0.5f, 1.0f);
+        warningLabel->setPosition(size.width / 2.0f, size.height - 25.0f);
+        warningLabel->setTextScale(0.5f);
+        this->addChild(warningLabel);
+
         m_fadeOut = engine::DrawNode::createRect(size.width, size.height, C2D_Color32(0, 0, 0, 255));
+        m_fadeOut->setOpacity(0.0f);
         this->addChild(m_fadeOut);
-        m_fadeOut->runAction(engine::Sequence::create(
-            engine::FadeOut::create(0.5f),
-            engine::DelayTime::create(1.7f),
-            engine::FadeIn::create(0.5f)
-        ));
     }
 
     void SplashSceneBottom::update(float dt) {

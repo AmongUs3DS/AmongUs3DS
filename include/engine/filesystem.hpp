@@ -40,6 +40,21 @@ namespace engine {
         }
 
         /**
+         * @brief Checks if a file exists.
+         * @param path Path to the file.
+         * @return True if file exists, false otherwise.
+         */
+        bool exists(const std::string& path) const {
+            std::string resolved = resolvePath(path);
+            FILE* f = std::fopen(resolved.c_str(), "r");
+            if (f) {
+                std::fclose(f);
+                return true;
+            }
+            return false;
+        }
+
+        /**
          * @brief Reads a text asset file from storage.
          * @param path Path to the target file.
          * @return String containing file contents.
